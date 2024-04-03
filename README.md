@@ -5,12 +5,11 @@ Envrionment for finetuning part:
 conda create --name local_ft python==3.8.0
 conda activate local_ft
 ```
-and install related libraries
+and install related libraries, make sure your pytorch is associated with cuda version
 
 ```bash
-conda install pytorch torchvision torchaudio pytorch-cuda=11.7 -c pytorch -c nvidia
-pip install omegaconf einops kornia
-pip install git+https://github.com/CompVis/taming-transformers.git
+conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
+pip install omegaconf einops kornia transformers Pillow==8.0.0 pytorch_lightning
 pip install git+https://github.com/openai/CLIP.git
 ```
 

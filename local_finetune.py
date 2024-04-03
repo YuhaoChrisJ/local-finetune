@@ -19,12 +19,12 @@ device = "cuda"
 parser = argparse.ArgumentParser(description="Simple example of a training script.")
 parser.add_argument("--person_id", type=str, default='1306', help="the person id for finetuning.")
 parser.add_argument("--epochs", type=int, default=200, help="the person id for finetuning.")
-
+args = parser.parse_args()
 
 
 # --------------- load model ---------------#
 #read local model
-saved_ckpt = torch.load("./model_weights/gligen.bin", map_location=torch.device('cpu'))
+saved_ckpt = torch.load("./model_weights/diffusion_pytorch_model.bin", map_location=torch.device('cpu'))
 config = saved_ckpt["config_dict"]["_content"]
 config = OmegaConf.create(config)
 model = instantiate_from_config(config.model).to(device)
@@ -144,7 +144,7 @@ transform = transforms.Compose([
 img_path = './data/selected_faces/'
 info_path = './data/face_data.json'
 
-image_to_load = [f for f in os.listdir(img_path) if f.startswith(parser.person_id)]
+image_to_load = [f for f in os.listdir(img_path) if f.startswith(args.person_id)]
 with open(info_path, 'r') as f:
     info = json.load(f)
 
@@ -252,10 +252,10 @@ dataloader = DataLoader(dataset, batch_size=1, shuffle=True)
 
 # --------------- start training -----------------------#
 
-num_train_epochs = parser.epochs
+num_train_epochs = args.epochs
+epoch_num = 0
 for epoch in range(num_train_epochs):
     model.train()
-    train_loss = 0.0
     for batch in dataloader:
         opt.zero_grad()  # 清除梯度
         x = batch['image'].to(device)
@@ -279,10 +279,12 @@ for epoch in range(num_train_epochs):
         loss = torch.nn.functional.mse_loss(predict_noise[:,:,int(64*top):int(64*bottom),int(64*left):int(64*right)], noise[:,:,int(64*top):int(64*bottom),int(64*left):int(64*right)])
         # loss = torch.nn.functional.mse_loss(predict_noise, noise)
 
-        # print(loss)
+        print(loss)
         loss.backward()
         opt.step()
         scheduler.step()
+    epoch_num += 1
+    print("epoch ", epoch_num)
 
 # --------------- save as sd architecture -----------------------#
 sd_model_path = './model_weights/sd-v1-4.ckpt'
@@ -294,4 +296,4 @@ for k,v in sd_ckpt["state_dict"].items():
     sd_ckpt["state_dict"][k] = params[i]
     i+=1
 
-torch.save(sd_ckpt, parser.person_id + "_tuned_sd.ckpt")
+torch.save(sd_ckpt, args.person_id + "_tuned_sd.ckpt")
