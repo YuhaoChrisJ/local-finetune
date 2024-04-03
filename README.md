@@ -3,7 +3,7 @@ Envrionment for finetuning part:
 
 ```bash
 conda create --name local_ft python==3.8.0
-conda activate divcon
+conda activate local_ft
 ```
 and install related libraries
 
