@@ -9,8 +9,9 @@ and install related libraries, make sure your pytorch is associated with cuda ve
 
 ```bash
 conda install pytorch torchvision torchaudio pytorch-cuda=12.1 -c pytorch -c nvidia
-pip install omegaconf einops kornia transformers Pillow==8.0.0 pytorch_lightning
+pip install diffusers omegaconf einops kornia transformers Pillow==8.0.0 pytorch_lightning==1.4.2 torchmetrics==0.6.0 invisible-watermark opencv-python
 pip install git+https://github.com/openai/CLIP.git
+pip install -e git+https://github.com/CompVis/taming-transformers.git@master#egg=taming-transformers
 ```
 
 ## GLIGEN and SD model weights
@@ -30,8 +31,8 @@ python local_finetune.py --person_id 1306 --epochs 200
 
 
 ## INFERENCE
-Now navigate to stable-diffusion, follow the instruction to create a new envrionment, then do the inference with your tuned ckpt file.
+Now navigate to stable-diffusion, then do the inference with your tuned ckpt file.
 
 ```bash
-python scripts/txt2img.py --prompt "a photograph of an astronaut riding a horse" --plms 
+python scripts/txt2img.py --prompt "a photograph of an astronaut riding a horse" --plms --ckpt models/ldm/stable-diffusion-v1/1306_tuned_sd.ckpt
 ```
