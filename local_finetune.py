@@ -296,4 +296,4 @@ for k,v in sd_ckpt["state_dict"].items():
     sd_ckpt["state_dict"][k] = params[i]
     i+=1
 
-torch.save(sd_ckpt, args.person_id + "_tuned_sd.ckpt")
+torch.save(sd_ckpt, "stable-diffusion/models/ldm/stable-diffusion-v1/" + args.person_id + "_tuned_sd.ckpt")
