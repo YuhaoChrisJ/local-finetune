@@ -20,3 +20,6 @@ Then, download the two models and save them under /model_weights:
 wget -P model_weights https://huggingface.co/gligen/gligen-generation-text-box/resolve/main/diffusion_pytorch_model.bin
 wget -P model_weights https://huggingface.co/CompVis/stable-diffusion-v-1-4-original/resolve/main/sd-v1-4.ckpt
 ```
+
+## INFERENCE
+The finetuned model will be saved under 
