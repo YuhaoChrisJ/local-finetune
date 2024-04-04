@@ -25,7 +25,7 @@ wget -P model_weights https://huggingface.co/CompVis/stable-diffusion-v-1-4-orig
 Start fine tuning with the following code. The finetuned model will be saved under "stable-diffusion/models/ldm/stable-diffusion-v1/". 
 
 ```bash
-python local fine_finetune.py --person_id 1306 --epochs 200
+python local_finetune.py --person_id 1306 --epochs 200
 ```
 
 
