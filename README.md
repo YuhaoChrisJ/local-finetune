@@ -30,9 +30,8 @@ python local fine_finetune.py --person_id 1306 --epochs 200
 
 
 ## INFERENCE
-Now navigate to stable diffusion, follow the instruction to create a new envrionment, then do the inference with your tuned ckpt file.
+Now navigate to stable-diffusion, follow the instruction to create a new envrionment, then do the inference with your tuned ckpt file.
 
 ```bash
-wget -P model_weights https://huggingface.co/gligen/gligen-generation-text-box/resolve/main/diffusion_pytorch_model.bin
-wget -P model_weights https://huggingface.co/CompVis/stable-diffusion-v-1-4-original/resolve/main/sd-v1-4.ckpt
+python scripts/txt2img.py --prompt "a photograph of an astronaut riding a horse" --plms 
 ```
