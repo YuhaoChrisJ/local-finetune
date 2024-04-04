@@ -21,7 +21,7 @@ wget -P model_weights https://huggingface.co/gligen/gligen-generation-text-box/r
 wget -P model_weights https://huggingface.co/CompVis/stable-diffusion-v-1-4-original/resolve/main/sd-v1-4.ckpt
 ```
 
-## INFERENCE
+## FINETUNE
 Start fine tuning with the following code. The finetuned model will be saved under "stable-diffusion/models/ldm/stable-diffusion-v1/". 
 
 ```bash
