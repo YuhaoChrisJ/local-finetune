@@ -22,6 +22,8 @@ from ldm.models.diffusion.dpm_solver import DPMSolverSampler
 from diffusers.pipelines.stable_diffusion.safety_checker import StableDiffusionSafetyChecker
 from transformers import AutoFeatureExtractor
 
+import re
+
 
 # load safety model
 safety_model_id = "CompVis/stable-diffusion-safety-checker"
@@ -323,7 +325,9 @@ def main():
                                 x_sample = 255. * rearrange(x_sample.cpu().numpy(), 'c h w -> h w c')
                                 img = Image.fromarray(x_sample.astype(np.uint8))
                                 img = put_watermark(img, wm_encoder)
-                                img.save(os.path.join(sample_path, f"{base_count:05}.png"))
+                                pattern = r"/(\d+)_"
+                                person_id = re.search(pattern, opt.ckpt)
+                                img.save(os.path.join(sample_path, f"{person_id}_{base_count:05}.png"))
                                 base_count += 1
 
                         if not opt.skip_grid:
