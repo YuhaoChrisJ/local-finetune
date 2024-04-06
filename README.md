@@ -34,5 +34,5 @@ python local_finetune.py --person_id 1306 --epochs 200
 Now navigate to stable-diffusion, then do the inference with your tuned ckpt file.
 
 ```bash
-python scripts/txt2img.py --prompt "a photograph of an astronaut riding a horse" --plms --ckpt models/ldm/stable-diffusion-v1/1306_tuned_sd.ckpt
+python txt2img.py --prompt "a photograph of Patricia Brown" --plms --ckpt models/ldm/stable-diffusion-v1/1306_tuned_sd.ckpt --n_samples 1 --n_iter 1
 ```
